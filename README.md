@@ -11,5 +11,12 @@
 
 To install this `cookiecutter` template, run the following command:
 ```bash
+pip install pipx
 pipx run cookiecutter gh:tjmaynes/python-base-mcp-server
+```
+
+Or:
+```bash
+python -m pip install --user cookiecutter
+cookiecutter gh:tjmaynes/python-base-mcp-server
 ```
