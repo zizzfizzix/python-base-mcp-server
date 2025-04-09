@@ -9,7 +9,7 @@ authors = [
 ]
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">={{ cookiecutter.python_version }}"
 dynamic = ["version"]
 
 classifiers = [
@@ -19,15 +19,15 @@ classifiers = [
 ]
 
 dependencies = [
-    "mcp[cli]==1.6.0",
-    "httpx==0.27.1"
+    "mcp[cli]",
+    "httpx"
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
-    "mypy==1.13.0",
-    "pytest==8.3.4",
-    "ruff==0.8.3"
+    "mypy",
+    "pytest",
+    "ruff"
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -37,15 +37,28 @@ packages = ["{{ cookiecutter.project_slug }}"]
 path = "{{ cookiecutter.project_slug }}/version.py"
 
 [project.scripts]
-{{ cookiecutter.project_name }} = "{{ cookiecutter.project_slug }}.main:app"
+{{ cookiecutter.project_slug }} = "{{ cookiecutter.project_slug }}.main:app"
 
 [tool.pytest.ini_options]
 pythonpath = "{{ cookiecutter.project_slug }}"
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "{{ cookiecutter.python_version }}"
 warn_return_any = true
 warn_unused_configs = true
 exclude = [
     ".+test_"
 ]
+
+[tool.ruff]
+line-length = 88
+target-version = "py{{ cookiecutter.python_version.replace('.', '') }}"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"

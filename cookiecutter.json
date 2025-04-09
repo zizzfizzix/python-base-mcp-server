@@ -1,9 +1,10 @@
 {
-    "full_name": "TJ Maynes",
-    "email": "tj@tjmaynes.com",
-    "github_username": "tjmaynes",
-    "project_name": "python-base-project-example",
-    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
-    "project_short_description": "A cookiecutter template for quickly bootstrapping a python project.",
-    "version": "0.1.0"
+    "full_name": "Kuba Serafinowski",
+    "email": "",
+    "github_username": "zizzfizzix",
+    "project_name": "mcp-server-example",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "project_short_description": "A Model Context Protocol server that…",
+    "version": "0.1.0",
+    "python_version": "3.13"
 }

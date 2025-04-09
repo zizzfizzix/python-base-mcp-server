@@ -1,22 +1,22 @@
+.PHONY: install lint format test build deploy ship_it start mcp_inspector clean
+
 install:
-	chmod +x ./scripts/install.sh
-	./scripts/install.sh
+	uv sync
 
 lint:
-	. .venv/bin/activate; python -m mypy --strict {{ cookiecutter.project_slug }}/
-	. .venv/bin/activate; python -m ruff check {{ cookiecutter.project_slug }}/
+	uv run mypy --strict {{ cookiecutter.project_slug }}/
+	uv run ruff check {{ cookiecutter.project_slug }}/
 
 format:
-	. .venv/bin/activate; python -m ruff format {{ cookiecutter.project_slug }}/
+	uv run ruff format {{ cookiecutter.project_slug }}/
 
 test:
-	. .venv/bin/activate; python -m pytest {{ cookiecutter.project_slug }} \
+	uv run pytest {{ cookiecutter.project_slug }} \
 		--doctest-modules \
 		--junitxml=reports/test-results-$(shell cat .python-version).xml
 
-.PHONY: build
 build: clean
-	. .venv/bin/activate; python -m build
+	uv run build
 
 deploy: install build
 

@@ -2,44 +2,99 @@
 
 > {{ cookiecutter.project_short_description }}
 
-## Requirements
+## Installation
 
-- [Python](https://www.python.org)
-- [Nodejs](https://nodejs.org)
+### Using uv (recommended)
 
-## Usage
+When using [`uv`](https://docs.astral.sh/uv/) no specific installation is needed. We will use [`uvx`](https://docs.astral.sh/uv/guides/tools/) to directly run *{{ cookiecutter.project_slug }}*.
 
-To install project dependencies, run the following command:
+### Using make
+
+Alternatively you can install `{{ cookiecutter.project_slug }}` using make:
 ```bash
 make install
 ```
 
-To run all tests, run the following command:
-```bash
-make test
-```
-
-To build the app, run the following command:
-```bash
-make build
-```
-
-To lint the project, run the following command:
-```bash
-make lint
-```
-
-To format the project, run the following command:
-```bash
-make format
-```
-
-To start the app, run the following command:
+After installation, you can run it using:
 ```bash
 make start
 ```
 
-To run the MCP inspector, run the following command:
+## Configuration
+
+### Configure for Claude.app
+
+Add to your Claude settings:
+
+Using uvx
+```json
+"mcpServers": {
+  "{{ cookiecutter.project_slug }}": {
+    "command": "uvx",
+    "args": ["{{ cookiecutter.project_slug }}"]
+  }
+}
+```
+
+Using docker
+```json
+"mcpServers": {
+  "{{ cookiecutter.project_slug }}": {
+    "command": "docker",
+    "args": ["run", "-i", "--rm", "mcp/{{ cookiecutter.project_slug }}"]
+  }
+}
+```
+
+### Configure for Zed
+
+Add to your Zed settings.json:
+
+Using uvx
+```json
+"context_servers": [
+  "{{ cookiecutter.project_slug }}": {
+    "command": "uvx",
+    "args": ["{{ cookiecutter.project_slug }}"]
+  }
+],
+```
+
+Using make installation
+```json
+"context_servers": {
+  "{{ cookiecutter.project_slug }}": {
+    "command": "make",
+    "args": ["start"]
+  }
+},
+```
+
+## Debugging
+
+You can use the MCP inspector to debug the server. For uvx installations:
 ```bash
 make mcp_inspector
 ```
+
+## Development
+
+For development, you can use the following commands:
+
+```bash
+# Install dependencies
+make install
+
+# Run tests
+make test
+
+# Run linting
+make lint
+
+# Format code
+make format
+```
+
+## License
+
+{{ cookiecutter.project_name }} is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.

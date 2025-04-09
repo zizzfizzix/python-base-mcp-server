@@ -1,4 +1,5 @@
 from mcp.server.fastmcp import FastMCP
+
 from {{ cookiecutter.project_slug }}.services.weather import WeatherRepository, WeatherService
 from {{ cookiecutter.project_slug }}.tools.weather import add_weather_tools
 

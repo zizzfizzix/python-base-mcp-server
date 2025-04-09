@@ -1,4 +1,5 @@
 from mcp.server.fastmcp import FastMCP
+
 from {{ cookiecutter.project_slug }}.services.weather import WeatherService
 
 
