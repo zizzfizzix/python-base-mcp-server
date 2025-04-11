@@ -133,6 +133,14 @@ You can use the MCP inspector to debug the server.
 make mcp_inspector
 ```
 
+### Creating from Template
+
+This MCP server was created from a cookiecutter template. To create a similar one, run:
+
+```bash
+uvx cookiecutter gh:zizzfizzix/python-base-mcp-server
+```
+
 ## License
 
 {{ cookiecutter.project_name }} is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.
