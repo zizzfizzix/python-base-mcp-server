@@ -5,7 +5,7 @@ install:
 
 lint:
 	uv run mypy --strict {{ cookiecutter.project_slug }}/
-	uv run ruff check {{ cookiecutter.project_slug }}/
+	uv run ruff check --fix {{ cookiecutter.project_slug }}/
 
 format:
 	uv run ruff format {{ cookiecutter.project_slug }}/

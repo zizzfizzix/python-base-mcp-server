@@ -4,78 +4,105 @@
 
 ## Installation
 
-### Using uv (recommended)
+### Using uvx (recommended)
 
-When using [`uv`](https://docs.astral.sh/uv/) no specific installation is needed. We will use [`uvx`](https://docs.astral.sh/uv/guides/tools/) to directly run *{{ cookiecutter.project_slug }}*.
+When using uvx no specific installation is needed. We will use it to directly run *{{ cookiecutter.project_slug }}* from the client app.
 
-### Using make
+#### Add to Claude desktop with uvx
 
-Alternatively you can install `{{ cookiecutter.project_slug }}` using make:
-```bash
-make install
-```
+In your Claude config specify:
 
-After installation, you can run it using:
-```bash
-make start
-```
-
-## Configuration
-
-### Configure for Claude.app
-
-Add to your Claude settings:
-
-Using uvx
 ```json
 "mcpServers": {
   "{{ cookiecutter.project_slug }}": {
     "command": "uvx",
-    "args": ["{{ cookiecutter.project_slug }}"]
+    "args": [
+      "--from",
+      "git+https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}",
+      "{{ cookiecutter.project_slug }}"
+    ]
   }
 }
 ```
 
-Using docker
-```json
-"mcpServers": {
-  "{{ cookiecutter.project_slug }}": {
-    "command": "docker",
-    "args": ["run", "-i", "--rm", "mcp/{{ cookiecutter.project_slug }}"]
-  }
-}
-```
+#### Add to Zed with uvx
 
-### Configure for Zed
+In your Zed settings.json add:
 
-Add to your Zed settings.json:
-
-Using uvx
 ```json
 "context_servers": [
   "{{ cookiecutter.project_slug }}": {
     "command": "uvx",
-    "args": ["{{ cookiecutter.project_slug }}"]
+    "args": [
+      "--from",
+      "git+https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}",
+      "{{ cookiecutter.project_slug }}"
+    ]
   }
 ],
 ```
 
-Using make installation
+### Using make
+
+Alternatively you can install `{{ cookiecutter.project_slug }}` using make:
+
+```bash
+make install
+```
+
+#### Add to Claude desktop with make
+
+In your Claude config specify:
+
+```json
+"mcpServers": {
+  "{{ cookiecutter.project_slug }}": {
+    "command": "/path/to/{{ cookiecutter.project_name }}/.venv/bin/python",
+    "args": ["/path/to/{{ cookiecutter.project_name }}/{{ cookiecutter.project_slug }}/main.py"]
+  }
+}
+```
+
+#### Add to Zed with make
+
+In your Zed settings.json add:
+
 ```json
 "context_servers": {
   "{{ cookiecutter.project_slug }}": {
-    "command": "make",
-    "args": ["start"]
+    "command": "/path/to/{{ cookiecutter.project_name }}/.venv/bin/python",
+    "args": ["/path/to/{{ cookiecutter.project_name }}/{{ cookiecutter.project_slug }}/main.py"]
   }
 },
 ```
 
-## Debugging
+## Usage
 
-You can use the MCP inspector to debug the server. For uvx installations:
-```bash
-make mcp_inspector
+After you've successfully added this MCP server to your assistant app follow the next steps below.
+
+### 1. Configuration (Optional)
+
+You can configure the server using environment variables in your client app's settings. For example:
+
+```json
+"mcpServers": {
+  "{{ cookiecutter.project_slug }}": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "git+https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}",
+      "{{ cookiecutter.project_slug }}"
+    ],
+    "env": {
+      "EXAMPLE_VAR": "example_value"
+    }
+  }
+}
 ```
+
+## Examples
+
+Usage examples go here.
 
 ## Development
 
@@ -85,6 +112,9 @@ For development, you can use the following commands:
 # Install dependencies
 make install
 
+# Start the server
+make start
+
 # Run tests
 make test
 
@@ -93,6 +123,14 @@ make lint
 
 # Format code
 make format
+```
+
+### Debugging
+
+You can use the MCP inspector to debug the server.
+
+```bash
+make mcp_inspector
 ```
 
 ## License
